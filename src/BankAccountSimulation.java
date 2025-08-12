@@ -2,17 +2,17 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 class Account {
-    private String accountNumber;
-    private String accountHolder;
+    private final String accountNumber;
+    private final String accountHolder;
     private double balance;
-    private ArrayList<String> transactionHistory;
+    private final ArrayList<String> transactionHistory;
 
     public Account(String accountNumber, String accountHolder, double initialBalance) {
         this.accountNumber = accountNumber;
         this.accountHolder = accountHolder;
         this.balance = initialBalance;
         this.transactionHistory = new ArrayList<>();
-        transactionHistory.add("Account created with balance: " + initialBalance);
+        transactionHistory.add("Account created with initial balance: " + initialBalance);
     }
 
     public void deposit(double amount) {
@@ -45,6 +45,13 @@ class Account {
             System.out.println(record);
         }
     }
+
+    public void displayAccountDetails() {
+        System.out.println("\n🏦 Account Details:");
+        System.out.println("Account Number: " + accountNumber);
+        System.out.println("Account Holder: " + accountHolder);
+        System.out.println("Balance: " + balance);
+    }
 }
 
 public class BankAccountSimulation {
@@ -69,7 +76,8 @@ public class BankAccountSimulation {
             System.out.println("2. Withdraw");
             System.out.println("3. Check Balance");
             System.out.println("4. Transaction History");
-            System.out.println("5. Exit");
+            System.out.println("5. Account Details");
+            System.out.println("6. Exit");
             System.out.print("Enter your choice: ");
             choice = sc.nextInt();
 
@@ -91,12 +99,15 @@ public class BankAccountSimulation {
                     account.printTransactionHistory();
                     break;
                 case 5:
+                    account.displayAccountDetails();
+                    break;
+                case 6:
                     System.out.println("🏦 Thank you for banking with us!");
                     break;
                 default:
                     System.out.println("❌ Invalid choice. Try again.");
             }
-        } while (choice != 5);
+        } while (choice != 6);
 
         sc.close();
     }
